@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/actions/view.css' %}"/>
+
+<h2>List of publishers</h2>
+<form method="POST">
+    <table>
+        <tr>
+            <th>Company name</th>
+            <th>Adress</th>
+            {% if request.user.status == 'Admin' %}
+                <th>Update</th>
+                <th>Delete</th>
+                <th>Add new</th>
+            {% endif %}
+        </tr>
+            {% for publisher in publishers %}
+                <tr>
+                    <td>{{ publisher.company_name }}</td>
+                    <td>{{ publisher.adress }}</td>
+                    {% if request.user.status == 'Admin' %}
+                        <td><a href="{% url 'ebook_store_app:update-publisher' publisher.id %}">Edit</a></td>
+                        <td><a href="{% url 'ebook_store_app:delete-publisher' publisher.id %}">Delete</a></td>
+                        <td><a href="{% url 'ebook_store_app:add-publisher' %}">Add new publisher</a></td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+    </table>
+</form>
+{% endblock %}

@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/actions/action.css' %}"/>
+
+<div class="container-add">
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-1">
+                <label for="title">Title</label>
+            </div>
+            <div class="col-2">
+                {{ form.title }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-1">
+                <label for="description">Description</label>
+            </div>
+            <div class="col-2" style="height:200px">
+                {{ form.description }}
+            </div>
+        </div><br><br>
+        <div class="row">
+            <div class="col-1">
+                <label for="picture">Picture</label>
+            </div>
+            <div class="col-2">
+                {{ form.picture }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-1">
+                <label for="price">Price</label>
+            </div>
+            <div class="col-2">
+                {{ form.price }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-1">
+                <label for="quantity">Publication year</label>
+            </div>
+            <div class="col-2">
+                {{ form.publication_year }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-1">
+                <label for="author_id">Author</label>
+            </div>
+            <div class="col-2">
+                {{ form.author_id }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-1">
+                <label for="publisher_id">Publisher</label>
+            </div>
+            <div class="col-2">
+                {{ form.publisher_id }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-1">
+                <label for="genre_id">Genre</label>
+            </div>
+            <div class="col-2">
+                {{ form.genre_id }}
+            </div>
+        </div>
+        <input type="submit" value="Submit">
+    </form>
+    <a class="btn-cancel" href="/home">Cancel</a>
+</div>
+{% endblock %}

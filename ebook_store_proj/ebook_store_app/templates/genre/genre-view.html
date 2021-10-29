@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/actions/view.css' %}"/>
+
+<h2>List of genres</h2>
+<form method="POST">
+    <div style="overflow-x:auto;">
+        <table>
+            <tr>
+                <th>Type</th>
+                {% if request.user.status == 'Admin' %}
+                    <th>Update</th>
+                    <th>Delete</th>
+                    <th>Add new</th>
+                {% endif %}
+            </tr>
+            {% for genre in genres %}
+                <tr>
+                    <td>{{ genre.genre_type }}</td>
+                    {% if request.user.status == 'Admin' %}
+                        <td><a href="{% url 'ebook_store_app:update-genre' genre.id %}">Edit</a></td>
+                        <td><a href="{% url 'ebook_store_app:delete-genre' genre.id %}">Delete</a></td>
+                        <td><a href="{% url 'ebook_store_app:add-genre' %}">Add new genre</a></td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+        </div>
+    </table>
+</form>
+{% endblock %}

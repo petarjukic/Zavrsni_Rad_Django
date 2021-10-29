@@ -1,0 +1,45 @@
+<title>About us</title>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/info/style.css' %}"/> 
+
+<div class="about-section">
+    <h1>About us</h1>
+    <p class="desc">This is page for online book shopping. Hope you like it. There you can alos see our team</p>
+</div>
+<h2 class="team">Our team</h2>
+<div class="row-1">
+    <div class="column-1">
+        <div class="card">
+            <img src="../../static/media/john.jpg" alt="John" width="100%">
+            <div class="container">
+                <h2>John Doe</h2>
+                <p class="title">Art Director</p>
+                <p>John is 32 years old. Born in New York. Has been working as an art director in the company for 7 years</p>
+            </div>
+        </div>
+    </div>
+    <div class="column-1">
+        <div class="card">
+            <img src="../../static/media/susan.jpg" alt="Susan" width="100%">
+            <div class="container">
+                <h2>Susan Adams</h2>
+                <p class="title">CEO & Founder</p>
+                <p>Susan is 35 years old. Born in Houston. Started the company in 2000.</p>
+            </div>
+        </div>
+    </div>
+    <div class="column-1">
+        <div class="card">
+            <img src="../../static/media/terry.jpg" alt="Terry" width="100%">
+            <div class="container">
+                <h2>Terry Williams</h2>
+                <p class="title">Designer</p>
+                <p>Terry is 30 years old. Born in Toronto. Has been working as a designer in the company for 6 years</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

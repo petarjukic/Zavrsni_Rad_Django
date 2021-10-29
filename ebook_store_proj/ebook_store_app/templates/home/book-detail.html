@@ -1,0 +1,42 @@
+<title>Ebook store</title>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/home/single.css' %}"/> 
+
+<div class="home">
+    <div class="small-container single-product">
+        <div class="row">
+            <div class="column">
+                <img src="{{ book.picture.url }}" alt="{{ book.title }}">
+            </div>
+            <div class="column">
+                <h1>{{ book.title }}</h1>
+                <h2>{{ book.author_id.first_name }} {{ book.author_id.last_name }}</h2>
+                <h3>Genre: <span style="color:red;font-size: larger;">{{ book.genre_id }}</span></h3>
+                <h4>${{ book.price }}</h4>
+                <button data-product="{{ book.id }}" data-action="add" class="cart-btn update-cart">Add to cart</button><br><br>
+                <h3>Description</h3><br>
+                <p>{{ book.description }}</p>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="small-contaier">
+        <div class="row row-2">
+            <h2 class="title">Same genre</h2> 
+        </div>
+        <div class="row">
+            {% for book in related_books %}
+                <div class="col">
+                    <a href="{% url 'ebook_store_app:detail-book' book.id %}"><img src="{{ book.picture.url }}" alt="{{ book.title }}" style="width: 10%;"></a>
+                    <h4 class="product">{{ book.title }}</h4>
+                    <h4 class="product">{{ book.author_id.first_name }} {{ book.author_id.last_name }}</h4>
+                    <p class="price">${{ book.price }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

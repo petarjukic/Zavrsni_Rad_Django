@@ -1,0 +1,50 @@
+<title>Checkout</title>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/home/checkout.css' %}">
+
+<main class="page payment-page">
+    <section class="payment-form dark">
+      <div class="container">
+        <div class="block-heading">
+          <h2>Checkout</h2>
+        </div>
+        <form id="form">
+          {% csrf_token %}
+          <div class="products">
+            <h3 class="title">Checkout</h3>
+            {% for item in items %}
+            <div class="item">
+              <span class="price">${{ item.book_id.price }}</span>
+              <p class="item-name">{{ item.book_id.title }}</p>
+              <p class="item-description">{{ item.book_id.author_id.first_name }} {{ item.book_id.author_id.last_name }}</p>
+            </div>
+            {% endfor %}
+            <div class="total">Total<span class="price">${{ order.get_cart_total }}</span></div>
+          </div>
+          <hr>
+          <div class="products">
+            <h3 class="title">User detail</h3>
+            {% if not request.user.is_authenticated %}
+              <input type=text class="form-input" name="username" placeholder="Username"><br>
+              <input type=email class="form-input" name="email" placeholder="Email"><br>
+            {% endif %}
+            <input type=text class="form-input" name="adress" placeholder="Adress"><br>
+            <input type=text class="form-input" name="city" placeholder="City"><br>
+            <input type=text class="form-input" name="country" placeholder="Country"><br>
+            <input type=text class="form-input" name="zip_code" placeholder="Zip code">
+          </div>
+        <div class="form-group col-sm-12">
+          <button type="submit" class="btn btn-primary btn-block make-payment">Proceed</button>
+          <button type="submit" formaction="/cart" class="btn btn-primary btn-block">Back to cart</button>
+        </form>
+      </div>
+    </section>
+  </main>
+<script>
+  var total = '{{order.get_cart_total}}';
+</script>
+<script type="text/javascript" src="{% static 'js/checkout.js' %}"></script>
+{% endblock %}

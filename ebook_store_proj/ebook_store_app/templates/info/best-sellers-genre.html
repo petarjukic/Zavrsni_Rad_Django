@@ -1,0 +1,44 @@
+<title>Bestsellers</title>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/home/home-style.css' %}"/>
+
+{% if best_seller_book|length != 0 %}
+    <h2 class="best-sellers">Top {% if best_seller_book|length > 5 %} 5
+        {% else %}
+            {{ best_seller_book|length }}
+        {% endif %}
+        best seller by genre</h2>
+    <div class="container">
+        <div class="row clearfix">
+            {% for book in best_seller_book %}
+            <div class="col-lg-3 col-md-4 col-sm-12">
+                <div class="card product_item">
+                    <div class="body">
+                        <div class="cp_img">
+                            <a href="{% url 'ebook_store_app:detail-book' book.book_id.id %}">
+                            
+                            {% if book.book_id.picture %}
+                                <img src="{{ book.book_id.picture.url }}" alt="{{ book.book_id.title }}" class="img-fluid">
+                            {% endif %}
+                            </a>
+                        </div>
+                        <div class="product_details">
+                            <h5>{{ book.book_id.title }}</h5>
+                            <ul class="product_price list-unstyled">
+                                <li class="old_price">${{ book.book_id.price }}</li>
+                                <li class="old_price">{{ book.book_id.get_mean_value }}/5</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% else %}
+    <h2 class="best-sellers">There are no books sold for selected genre</h2>
+{% endif %}
+{% endblock %}

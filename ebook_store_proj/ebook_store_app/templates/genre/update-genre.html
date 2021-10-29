@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/actions/action.css' %}"/>
+
+<div class="container-add">
+    <form method="POST">
+        <div class="row">
+            <div class="col-1">
+                <label for="genre">Genre</label>
+            </div>
+            <div class="col-2">
+                {{ form.genre_type }}
+            </div>
+        </div>
+        {% csrf_token %}
+        <input type="submit" value="Submit">
+    </form>
+    <a class="btn-cancel" href="/home">Cancel</a>
+</div>
+{% endblock %}

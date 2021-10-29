@@ -1,0 +1,67 @@
+<title>Cart</title>
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/home/cart-style.css' %}">
+	
+<main class="page">
+    <section class="shopping-cart dark">
+        <div class="container">
+            <div class="block-heading">
+                <h2>Shopping Cart</h2>
+            </div>
+            <div class="content">
+                <div class="row">
+                    <div class="col-md-12 col-lg-8">
+                        <div class="items">
+                            {% for item in items %}
+                            <div class="product">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <img class="img-fluid mx-auto d-block image" src="{{ item.book_id.picture.url }}">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="info">
+                                            <div class="row">
+                                                <div class="col-md-5 product-name">
+                                                    <div class="product-name">
+                                                        <a href="{% url 'ebook_store_app:detail-book' item.book_id.id %}">{{ item.book_id.title }}</a>
+                                                        <div class="product-info">
+                                                            <div>Author: <span class="value">{{ item.book_id.author_id.first_name }} {{ item.book_id.author_id.last_name }}</span></div>
+                                                            <div>Publisher: <span class="value">{{ item.book_id.publisher_id.company_name }}</span></div>
+                                                            <div>Genre: <span class="value">{{ item.book_id.genre_id.genre_type }}</span></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4 quantity">
+                                                    {{ item.order_id.total }}
+                                                    <img data-product="{{ item.book_id.id }}" data-action="add" class="chg-quantity update-cart" src="{% static 'media/arrow-up.png' %}">
+                                                    <img data-product="{{ item.book_id.id }}" data-action="remove" class="chg-quantity update-cart" src="{% static 'media/arrow-down.png' %}">
+                                                </div>
+                                                <div class="col-md-3 price">
+                                                    <span>${{ item.get_total }}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="col-md-12 col-lg-4">
+                        <div class="summary">
+                            <h3>Summary</h3>
+                            <div class="summary-item"><span class="text">Total items</span><span class="price">{{ order.get_cart_items }}</span></div>
+                            <div class="summary-item"><span class="text">Total</span><span class="price">${{ order.get_cart_total }}</span></div><br>
+                            <a href="/checkout" class="btn btn-primary btn-lg btn-block">Checkout</a>
+                            <a href="/home" class="btn btn-primary btn-lg btn-block btn-back">&#8592; Continue shopping</a>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}

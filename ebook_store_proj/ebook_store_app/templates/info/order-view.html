@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/actions/view.css' %}"/>
+
+<h2>List of orders</h2>
+<form method="POST">
+    <div style="overflow-x:auto;">
+        <table>
+            <tr>
+                <th>Order number</th>
+                <th>Order date</th>
+                <th>Is completed</th>
+                <th>Customer</th>
+                <th>Book/s</th>
+                <th>Total</th>
+                <th>Total price</th>
+            </tr>
+            {% for order in orders %}                
+                <tr>
+                    <td>{{ order.order_id.order_number }}</td>
+                    <td>{{ order.order_id.order_date }}</td>
+                    <td>{{ order.order_id.complete }}</td>
+                    <td>{{ order.order_id.customer_id.email }}</td>
+                    <td>{{ order.book_id.title }}</td>
+                    <td>{{ order.total }}</td>
+                    <td>{{ order.get_total}}</td>
+                </tr>
+            {% endfor %}
+        </div>
+    </table>
+</form>
+{% endblock %}

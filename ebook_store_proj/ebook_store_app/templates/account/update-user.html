@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/actions/action.css' %}"/>
+
+<div class="container-add">
+    <form method="POST">
+        <div class="row">
+            <div class="col-1">
+                <label for="title">Username</label>
+            </div>
+            <div class="col-2">
+                {{ form.username }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-1">
+                <label for="description">Email</label>
+            </div>
+            <div class="col-2">
+                {{ form.email }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-1">
+                <label for="author_id">Role</label>
+            </div>
+            <div class="col-2">
+                {{ form.status }}
+            </div>
+        </div>
+        {% csrf_token %}
+        <input type="submit" value="Submit">
+    </form>
+    <a class="btn-cancel" href="/user-view">Cancel</a>
+</div>
+{% endblock %}

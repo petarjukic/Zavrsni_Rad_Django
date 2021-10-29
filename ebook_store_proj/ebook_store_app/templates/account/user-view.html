@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/actions/view.css' %}"/>
+
+<h2>List of users</h2>
+<form method="POST">
+    <div style="overflow-x:auto;">
+        <table>
+            <tr>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Delete</th>
+                <th>Update</th>
+            </tr>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.status }}</td>
+                    <td><a href="{% url 'ebook_store_app:delete-user' user.id %}">Delete</a></td>
+                    <td><a href="{% url 'ebook_store_app:update-user' user.id %}">Update</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+</form>
+{% endblock %}
